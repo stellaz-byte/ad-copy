@@ -29,7 +29,7 @@ if st.button("🚀 Generate Diverse Ad Copies", use_container_width=True):
         st.warning("Please enter your API Key in the sidebar!")
     else:
         genai.configure(api_key=api_key)
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('gemini-pro')
         
         # 更加精准的 Prompt
        # 深度痛点挖掘版 Prompt
@@ -80,5 +80,6 @@ if st.button("🚀 Generate Diverse Ad Copies", use_container_width=True):
 
 st.divider()
 st.caption("Made for US Market Performance Marketing")
+
 
 
