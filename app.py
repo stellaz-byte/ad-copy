@@ -61,4 +61,5 @@ if st.button("Generate Ad Copy ✨"):
         with st.spinner('Analyzing data and crafting copy...'):
             response = model.generate_content(prompt)
             st.success("Generated!")
+
             st.markdown(response.text)
