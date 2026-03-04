@@ -3,50 +3,40 @@ import google.generativeai as genai
 
 st.set_page_config(page_title="Ad Copy Pro", layout="wide")
 
-# 直接从侧边栏获取 Key
 with st.sidebar:
     st.title("🔑 Configuration")
-    api_key = st.text_input("Enter Gemini API Key:", type="password")
+    api_key = st.text_input("Enter NEW Gemini API Key:", type="password")
+    st.info("Please use a NEW key from aistudio.google.com")
 
-st.title("🚀 US Ad Copy Generator")
+st.title("🚀 Ad Copy Generator")
 
-# 输入区
-pdp = st.text_input("Product URL (PDP):")
-reviews = st.text_area("Customer Reviews (Pain Points):", height=100)
-strategy = st.selectbox("Ad Strategy:", ["Evergreen", "Promo/Sale"])
+# 极简输入测试
+pdp = st.text_input("Product URL:")
+reviews = st.text_area("Customer Reviews:")
 
 if st.button("Generate Ad Copy"):
     if not api_key:
-        st.error("Please enter your API Key in the sidebar.")
+        st.error("Please enter your API Key!")
     else:
         try:
+            # 彻底初始化
             genai.configure(api_key=api_key)
             
-            # 使用包含 'models/' 前缀的完整路径，这是最稳的调用方式
-            # 即使库版本旧，这样写也能强行找到模型
-            model = genai.GenerativeModel('models/gemini-1.5-flash')
+            # 免费版最稳、最通用的模型名称
+            # 这一次我们不加 'models/' 也不加版本号，让库自己去找
+            model = genai.GenerativeModel('gemini-1.5-flash')
             
-            # 极简测试指令
-            prompt = f"Act as a US Copywriter. Product: {pdp}. Strategy: {strategy}. Reviews: {reviews}. Write 15 diverse Google Headlines and 3 Facebook Ads."
+            prompt = f"Product: {pdp}. Reviews: {reviews}. Write 5 catchy headlines for US Facebook ads."
             
-            with st.spinner('Connecting to Google AI...'):
+            with st.spinner('Testing connection...'):
                 response = model.generate_content(prompt)
-                st.success("Generation Successful!")
+                st.success("IT WORKS!")
                 st.markdown(response.text)
                 
         except Exception as e:
-            st.error("Technical Error Details:")
+            st.error("Still 404? Try this:")
+            st.write("1. Go to AI Studio.")
+            st.write("2. Create a BRAND NEW project and a NEW API Key.")
             st.code(str(e))
-            
-            # 自动备选方案：尝试旧版模型名
-            if "404" in str(e):
-                st.info("Trying legacy model name...")
-                try:
-                    legacy_model = genai.GenerativeModel('gemini-pro')
-                    resp = legacy_model.generate_content(prompt)
-                    st.markdown(resp.text)
-                except Exception as e2:
-                    st.error("Legacy model also failed: " + str(e2))
 
-st.divider()
-st.caption("Free Tier API Support | Ensure your key is from aistudio.google.com")
+st.caption("Status: Debugging Mode")
