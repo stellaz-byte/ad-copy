@@ -4,7 +4,7 @@ import google.generativeai as genai
 st.set_page_config(page_title="Ad Copy AI Expert", layout="wide")
 
 # 侧边栏配置
-api_key = "AIzaSyA9oHKZl5qzGI-FPk8Pi-fjqLGs9VCdtNo"
+api_key = "AIzaSyApvr8_cnQ9bZX3Joe6qd0S08X2wOPOQBA"
 
 st.title("🎯 US Market Ad Copy Generator")
 st.caption("Generate high-converting Google & Facebook ads based on PDP, Reviews, and R&D docs.")
@@ -80,6 +80,7 @@ if st.button("🚀 Generate Diverse Ad Copies", use_container_width=True):
 
 st.divider()
 st.caption("Made for US Market Performance Marketing")
+
 
 
 
