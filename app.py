@@ -35,20 +35,41 @@ if st.button("🚀 Generate Diverse Ad Copies", use_container_width=True):
         model = genai.GenerativeModel('gemini-1.5-flash')
         
         # 更加精准的 Prompt
+       # 深度痛点挖掘版 Prompt
         prompt = f"""
-        Role: Senior US Growth Copywriter.
-        Data: PDP={pdp_url}, Reviews={customer_reviews}, Strategy={ad_type}.
-        Goal: Generate English ad copy for US customers.
+        Role: Senior US DTC Growth Architect & Copywriter.
         
-        Task 1: Google Ads (Responsive Search Ads)
-        - 15 Diverse Headlines (30 chars max): Use different angles (1-3 Brand/Product, 4-6 Specs, 7-9 Pain points, 10-12 Benefits, 13-15 CTAs). NO REPETITION.
-        - 4 Descriptions (90 chars max).
+        Inputs:
+        - Product URL: {pdp_url}
+        - Customer Reviews/Feedback: {customer_reviews}
+        - Strategy: {ad_type}
+        - Custom Requirements: {custom_req}
+
+        --- STEP 1: VOICE OF CUSTOMER (VOC) ANALYSIS ---
+        If reviews are provided, identify:
+        1. THE "BEFORE" STATE: What was the specific frustration or 'nightmare' the customer faced? (e.g., "Replacing rusted trellises every year")
+        2. THE "AHA" MOMENT: What specific feature turned them into a fan?
+        3. THE COMPETITOR GAP: What did other products fail to do that this one solves?
+
+        --- STEP 2: GENERATE AD COPY (US ENGLISH) ---
         
-        Task 2: Facebook Ads
-        - 3 Primary Texts (Short, List-based, Emotional).
-        - 3 Catchy Headlines.
+        Task A: Google Ads (Responsive Search Ads)
+        - 15 Headlines (30 chars max): Use a 3-3-3-3-3 mix:
+          * 3x Direct Benefit (Solve the #1 pain point from reviews)
+          * 3x Hard Specs (Material, durability, US-based)
+          * 3x Social Proof/Trust (Based on review sentiment)
+          * 3x Brand & Authority
+          * 3x Strong CTAs
+        - 4 Descriptions (90 chars max): Mix 'Pain Point + Solution + CTA'.
         
-        Note: Use US English idioms. Focus on solving pain points found in reviews.
+        Task B: Facebook Ads (High Engagement)
+        - Variation 1 (The "Problem-Solver"): Start with a question about the pain point.
+        - Variation 2 (The "Review-Based"): Use a simulated quote or 'They said / We did' style.
+        - Variation 3 (The "Feature-Deep-Dive"): Focus on the R&D/Quality aspect.
+        
+        Guidelines: 
+        - Use US-native idioms (e.g., 'Say goodbye to...', 'Finally, a... that works').
+        - Avoid marketing fluff like 'Revolutionary' or 'Game-changing'. Use specific facts.
         """
         
         with st.spinner('AI is thinking...'):
@@ -62,3 +83,4 @@ if st.button("🚀 Generate Diverse Ad Copies", use_container_width=True):
 
 st.divider()
 st.caption("Made for US Market Performance Marketing")
+
